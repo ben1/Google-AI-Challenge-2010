@@ -1,0 +1,1 @@
+java -jar C:\Docume~1\Ben\MyDocu~1\MyDrop~1\Shared\planetwars\tools\playgame.jar C:\Docume~1\Ben\MyDocu~1\MyDrop~1\Shared\planetwars\maps\map42.txt 1000000 200 log.txt C:\Docume~1\Ben\MyDocu~1\MyDrop~1\Shared\planetwars/bin/release/planetwars.exe "java -jar C:\Docume~1\Ben\MyDocu~1\MyDrop~1\Shared\planetwars\example_bots/DualBot.jar"
