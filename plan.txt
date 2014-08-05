@@ -1,8 +1,6 @@
 ﻿_________
 TODO
 
-wait until opponent starts attacking your planets? simply defend until you can be guaranteed to be able to take an enemy planet. choice for taking neutral would have to be very good.
-
 
 take into account enemy fleets in transit to nearby planets
 
@@ -20,7 +18,7 @@ For each planet:
 	Send all of our ships and enemy ships to it, and evaluate the game state until x turns, where x is the largest of (distance to any planet + turns remaining for fleets to that planet)
 	Should be stable ownership by then, apart from differences in overall production wearing down one side.
 
-Evaluate which are the worthwhile planets to take, and which planets 
+Evaluate which are the worthwhile planets to take.
 
 		
 

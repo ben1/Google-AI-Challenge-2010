@@ -71,7 +71,7 @@ public class MyBot
     double invEnemyCount = 1.0 / (double)m_state.m_enemyPlanets.Count;
     double invMyCount = 1.0 / (double)m_state.m_myPlanets.Count;
 
-      int pnum = 0;
+    int pnum = 0;
     // calculate a score for each planet
     foreach (Planet p in a_pw.m_planets)
     {
@@ -114,23 +114,12 @@ public class MyBot
       // subtract score based on cost to take (only subtract if taking it from neutral because taking it from enemy is good)
       if (p.m_testFuture.m_eventualOwner == 0) // was m_owner, but we should really be checking against the owner N turns ahead where N is distance to us, so probably better to use the eventual owner anyway
       {
-        //List<int> ceps = m_state.GetClosestEnemyPlanets(p.m_planetID);
-        //List<int> cmps = m_state.GetClosestMyPlanets(p.m_planetID);
-        //List<int> dists = Precalc.Get.m_planetData[p.m_planetID].m_distances;
-        //if(ceps.Count > 0 && cmps.Count > 0)
-        //{
-        //  if(dists[ceps[0]] < dists[cmps[0]])
-        //  {
-        //    score = -10000;
-        //  }
-        //}        
-
         score -= m_costMul * (double)p.m_numShips;
       }
 
       score += (s_shipsSent[pnum] * 1000);
-pnum ++;
-score = 0;
+      pnum ++;
+
       // safety
       if (double.IsInfinity(score))
       {
@@ -141,6 +130,7 @@ score = 0;
       sortedScores.Add(p);
     }
 
+    // inverse exponential decrease in the weight we give to planets we are already sending ships to
     for (int i = 0; i < a_pw.NumPlanets(); ++i)
     {
         s_shipsSent[i] *= 0.5;
@@ -165,6 +155,7 @@ score = 0;
       // send the closest ships to the best scoring planet, next closest to next planet, etc.
       Planet targetPlanet = sortedScores[sortedScores.Count - targetPlanetIteration];
 
+      // don't attempt to go directly for the enemy home base on the first turn if they are very close, it is a massive gamble.
       if(m_state.m_current.m_turn == 1)
       {
         List<int> dists = Precalc.Get.m_planetData[targetPlanet.m_planetID].m_distances;
@@ -173,21 +164,25 @@ score = 0;
           continue;
         }
       }
-
-//      if ((double)targetPlanetIteration * (m_opts[0] - ((double)m_state.m_current.m_turn / m_opts[1])) > (double)sortedScores.Count)
+#if PW_DEBUG
+      if ((double)targetPlanetIteration * (m_opts[0] - ((double)m_state.m_current.m_turn / m_opts[1])) > (double)sortedScores.Count)
+#else
       if ((double)targetPlanetIteration * (2.3 - ((double)m_state.m_current.m_turn * s_inv190)) > (double)sortedScores.Count)
+#endif
       {
         break;
       }
-
-//      if (targetPlanet.m_score < targetPlanet.m_growthRate * -m_opts[0] + m_opts[1])
+#if PW_DEBUG
+      if (targetPlanet.m_score < targetPlanet.m_growthRate * -m_opts[0] + m_opts[1])
+#else
       if (targetPlanet.m_score < targetPlanet.m_growthRate * -80 + 260)
+#endif
       {
         break;
       }
 
       // Threaten the planet with enemy ships from the closest planet
-      // THIS WHOLE BLOCK IS WRONG BUT GETS THE BEST SCORE
+      // THIS WHOLE BLOCK IS WRONG BUT GETS THE BEST SCORE!
       if (targetPlanet.m_owner != 0)
       {
         int cepid2 = -1;
