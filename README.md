@@ -54,9 +54,13 @@ There are a number of special-case rules that were added to this primary algorit
 
 The bots were played against each other by running the Java planetwars game which would in turn call the executables for the AIs. This was terrible for debugging because it was difficult to attach a debugger to the spawned process before it completed or was shut down by the game for taking longer than 1 second to perform a turn. To debug easily, I created a command line proxy AI which piped gamestate and commands to and from my already-running bot in the debugger. 
 
+##Testing
+
+In order to test the AI again other versions of itself as well as some other opponents, I wrote a harness that would run AIs against each other on 100 random maps. I also added a TCP/IP option for testing against other bots that people ran via a server.
+
 ##Training
 
-In order to test the AI again other versions of itself as well as some other opponents, I wrote a harness that would run AIs against each other on 100 random maps. I then parametrized the main 'magic numbers' the algorithm used, and made the harness run multiple competitions, each with a different combination of parameters. I could quite quickly narrow in on the best combination of parameters. There were some local minima, but with a wade enough range of values, these were avoided as much as possible.
+I parametrized the main 'magic numbers' the algorithm used, and made the test harness run multiple competitions, each with a different combination of parameters. I could quite quickly narrow in on the best combination of parameters. There were some local minima, but with a wade enough range of values, these were avoided as much as possible.
 
 ##Optimization
 
