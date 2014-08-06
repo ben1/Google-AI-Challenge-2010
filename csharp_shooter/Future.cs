@@ -6,11 +6,11 @@ public class Future
 {
 
     public List<Fleet> m_incomingFleets;
-    public int m_eventualOwner;
+    public int m_eventualOwner; // 0 is neutral, 1 is me, 2 is enemy
     public int[] m_minNumShips = new int[3];
     public int[] m_minNumShipsTurn = new int[3];
     public List<FuturePlanet> m_future;
-    int m_originalOwner;
+    int m_originalOwner; // 0 is neutral, 1 is me, 2 is enemy
     int m_originalNumShips;
     int m_originalGrowthRate;
 

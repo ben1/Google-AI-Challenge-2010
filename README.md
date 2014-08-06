@@ -2,7 +2,7 @@ Google AI Challenge 2010
 ==========
 The [challenge](http://planetwars.aichallenge.org/) is basically a strategic conquest of the galaxy between 2 forces on a randomly generated map. The AI can see exactly how many ships are on each planet and are in flight. Each turn, the AI chooses how many ships to send from each of their planets to other planets.
 
-My entry for the challenge was a straight-forward heuristic approach with some brute-force optimization of parameters. It came 363 out of 4600 which I think is decent given the short amount of time I worked on it. 
+My entry for the challenge was a straight-forward heuristic approach with some brute-force optimization of parameters. It came 363 out of 4600 which I think is decent given the short amount of time I worked on it. Looking at the code a few years later, I would do it again quite differently, but many of the ideas would be reused.
 
 ##Disclaimer
 
@@ -60,7 +60,7 @@ In order to test the AI again other versions of itself as well as some other opp
 
 ##Training
 
-I parametrized the main 'magic numbers' the algorithm used, and made the test harness run multiple competitions, each with a different combination of parameters. I could quite quickly narrow in on the best combination of parameters. There were some local minima, but with a wade enough range of values, these were avoided as much as possible.
+I parametrized the main 'magic numbers' the algorithm used, and made the test harness run multiple tournaments, each with a different combination of parameters. These were queued up and run in a number of parallel threads equal to the number of cores on the machine. I could quite quickly narrow in on the best combination of parameters. There were some local minima, but with a wide enough range of values, these were avoided as much as possible.
 
 ##Optimization
 

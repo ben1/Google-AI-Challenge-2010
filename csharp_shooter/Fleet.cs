@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Fleet
 {
-    public int m_owner;
+    public int m_owner; // 0 is neutral, 1 is me, 2 is enemy
     public int m_numShips;
     public int m_sourcePlanet;
     public int m_destinationPlanet;

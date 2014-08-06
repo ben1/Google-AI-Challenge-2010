@@ -87,8 +87,10 @@ class Tester
         int total = 100;
         for (int m = 1; m <= total; ++m)
         {
+            // Wait until we have a spare core to run a new match on
             while (m_procs.Count >= s_numCores)
             {
+                // TODO: we should wait on a signal rather than polling
                 System.Threading.Thread.Sleep(5);
                 for (int i = 0; i < m_procs.Count; ++i)
                 {
@@ -99,10 +101,14 @@ class Tester
                     }
                 }
             }
+            
+            // Run the match as a new process
             PlayMatch(m, a_opts);
         }
+        // We have started all matches, now wait for the remaining ones to complete
         while (m_procs.Count > 0)
         {
+            // TODO: we should wait on a signal rather than polling
             System.Threading.Thread.Sleep(5);
             for (int i = 0; i < m_procs.Count; ++i)
             {
@@ -113,6 +119,8 @@ class Tester
                 }
             }
         }
+
+        // report win rate
         return m_wins - m_losses;
     }
 

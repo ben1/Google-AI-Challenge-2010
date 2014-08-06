@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Planet
 {
     public int m_planetID;
-    public int m_owner;
+    public int m_owner; // 0 is neutral, 1 is me, 2 is enemy
     public int m_numShips;
     public int m_growthRate;
     public double m_x, m_y;
@@ -13,7 +13,6 @@ public class Planet
     public int m_numShipsCanSafelySend;
 
     public Future m_originalFuture;
-    public Future m_focusFuture;
     public Future m_testFuture;
 
 
@@ -27,8 +26,6 @@ public class Planet
         this.m_y = y;
 
         m_originalFuture = new Future(m_owner, m_numShips, m_growthRate);
-        m_focusFuture = new Future(m_owner, m_numShips, m_growthRate);
-        //    m_testFuture = new Future(m_owner, m_numShips, m_growthRate);
     }
 
     public void Owner(int newOwner) { m_owner = newOwner; }
@@ -38,27 +35,6 @@ public class Planet
 
     public static int CompareScore(Planet a_1, Planet a_2)
     {
-        if (a_1.m_score > a_2.m_score)
-        {
-            return 1;
-        }
-        else if (a_1.m_score < a_2.m_score)
-        {
-            return -1;
-        }
-        return 0;
+        return Math.Sign(a_1.m_score - a_2.m_score);
     }
-
-    //  public int FindClosestPlanetThatCanSendShips()
-    //  {
-    //    List<int> distances = Precalc.Get.m_planetData[m_planetID].m_distances;
-    //    int closest = -1;
-    ////    int closestDist = 1000000;
-    //    for (int i = 0; i < distances.Count; ++i)
-    //    {
-    //    }
-    //    return closest;
-    //  }
-
-
 }
