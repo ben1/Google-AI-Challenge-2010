@@ -1,0 +1,5 @@
+/bin
+/obj
+*.suo
+/proxy_bot/bin
+/proxy_bot/obj
