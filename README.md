@@ -6,7 +6,7 @@ My entry for the challenge was a simple heuristic-based approach with some brute
 
 ##Disclaimer
 
-This code was not intended to live longer than the duration of the challenge, or be modified by others, and is therefore not a good example of maintainable code. But it does demonstrate some interesting techniques.
+This code was not intended to live longer than the duration of the challenge, or be modified by others, and is therefore not a good example of maintainable code. But it does demonstrate some interesting techniques, so I thought it would be worth sharing.
 
 ##Core Algorithm
 
